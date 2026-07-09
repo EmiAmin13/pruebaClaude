@@ -1,0 +1,26 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--navbar-height));
+}
+
+.content {
+  flex: 1;
+  padding: var(--space-6) var(--space-5) var(--space-8);
+}
+
+.content:focus {
+  outline: none;
+}
+
+@media (min-width: 1024px) {
+  /* El sidebar es `position: fixed`, así que el shell se desplaza para
+     dejarle sitio y el footer queda alineado con el contenido. */
+  .shell {
+    padding-left: var(--sidebar-width);
+  }
+
+  .content {
+    padding: var(--space-7) var(--space-7) var(--space-8);
+  }
+}

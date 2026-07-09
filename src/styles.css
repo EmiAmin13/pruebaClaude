@@ -1,1 +1,312 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   Tokens de diseño — sistema de la feature 000
+   Los ratios de contraste están verificados en styles.spec.ts
+   ============================================================ */
+
+:root {
+  /* Color — tema claro */
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-text: #14161c;
+  --color-text-muted: #5a6272;
+  --color-primary: #4338ca;
+  --color-accent: #0f766e;
+  --color-border: #e1e4ea;
+  --color-code-bg: #f1f3f7;
+
+  /* Tipografía */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+
+  /* Espaciado */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Forma */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 1px 2px rgb(20 22 28 / 6%);
+  --shadow-md: 0 4px 16px rgb(20 22 28 / 8%);
+
+  /* Layout */
+  --sidebar-width: 16rem;
+  --navbar-height: 3.5rem;
+  --measure: 68ch;
+}
+
+body.dark {
+  --color-bg: #0e1117;
+  --color-surface: #161a22;
+  --color-text: #e6e8ec;
+  --color-text-muted: #9ba3b0;
+  --color-primary: #a5b4fc;
+  --color-accent: #5eead4;
+  --color-border: #262c38;
+  --color-code-bg: #11151c;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-md: 0 4px 16px rgb(0 0 0 / 50%);
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+}
+
+/* ============================================================
+   Accesibilidad
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-surface);
+  background-color: var(--color-text);
+  border-radius: var(--radius-sm);
+  transform: translateY(calc(-100% - var(--space-4)));
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   Primitivas compartidas
+   Todo estilo usado en 3+ sitios vive aquí, no en el CSS del
+   componente, para no rozar el budget de 4 kB por componente.
+   ============================================================ */
+
+/* Marcador de spec: el eyebrow del sistema, p. ej. `[ 002 · FUNDAMENTOS ]` */
+.spec-marker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.spec-marker::before {
+  content: '[ ';
+}
+
+.spec-marker::after {
+  content: ' ]';
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose h2 {
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.prose h3 {
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.prose p + p {
+  margin-top: var(--space-4);
+}
+
+/* Listas, subtítulos y notas al pie de un bloque: usados por las seis páginas. */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.list li {
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border);
+}
+
+.subhead {
+  margin-top: var(--space-6);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.note {
+  max-width: var(--measure);
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* Contenedor de los diagramas SVG inline (002, 005, 006). */
+.diagram {
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  overflow-x: auto;
+  background-color: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.diagram svg {
+  width: 100%;
+  min-width: 30rem;
+  height: auto;
+  color: var(--color-text-muted);
+}
+
+.diagram text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--color-text);
+}
+
+.diagram .diagram__accent {
+  fill: var(--color-primary);
+}
+
+/* Envoltorio de scroll para tablas anchas en móvil. */
+.doc-table-wrap {
+  margin-top: var(--space-4);
+  overflow-x: auto;
+}
+
+.doc-table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.doc-table th,
+.doc-table td {
+  padding: var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.doc-table th {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}

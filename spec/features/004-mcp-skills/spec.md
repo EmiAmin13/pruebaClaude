@@ -1,6 +1,6 @@
 # 004 · MCP y Skills
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -12,12 +12,12 @@ MCP y Skills son dos de las herramientas más potentes de OpenCode. Los alumnos 
 
 ## Criterios de aceptación
 
-- [ ] Explicación de qué es MCP y para qué sirve.
-- [ ] Diferencia entre MCP (servicios externos) y Skills (conocimiento interno).
-- [ ] Tutorial de instalación de Context7 como MCP.
-- [ ] Tutorial de instalación de skills (frontend-design, find-skills).
-- [ ] Diseño responsive.
-- [ ] Pasa AXE checks.
+- [x] Explicación de qué es MCP y para qué sirve.
+- [x] Diferencia entre MCP (servicios externos) y Skills (conocimiento interno).
+- [x] Tutorial de instalación de Context7 como MCP.
+- [x] Tutorial de instalación de skills (frontend-design, find-skills).
+- [x] Diseño responsive.
+- [x] Pasa AXE checks.
 
 ## Fuera de alcance
 

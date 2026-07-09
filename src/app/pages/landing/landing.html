@@ -1,0 +1,68 @@
+<div class="hero">
+  <p class="spec-marker">Spec · 001</p>
+
+  <h1 class="hero__title">
+    Desarrollo con IA
+    <span class="hero__subtitle">Programa con agentes</span>
+  </h1>
+
+  <p class="hero__lede">
+    Del vibe coding a la ingeniería de software. Escribe la especificación, deja que el agente
+    implemente y verifica el resultado.
+  </p>
+
+  <a class="hero__cta" routerLink="/fundamentos-ia">Empezar por los fundamentos</a>
+
+  <dl class="hero__meta">
+    <div>
+      <dt>Estado</dt>
+      <dd>En curso</dd>
+    </div>
+    <div>
+      <dt>Módulos</dt>
+      <dd>{{ modules.length }}</dd>
+    </div>
+    <div>
+      <dt>Método</dt>
+      <dd>Spec-Driven Development</dd>
+    </div>
+  </dl>
+</div>
+
+<section class="section" aria-labelledby="que-hace">
+  <h2 id="que-hace" class="section__title">Qué hace</h2>
+  <div class="prose">
+    <p>
+      Este sitio recoge los contenidos del curso y los deja donde se puedan consultar rápido: cómo
+      funcionan los modelos de lenguaje, cómo se dirige un agente de código y cómo se escribe
+      software contra una especificación en vez de contra una corazonada.
+    </p>
+    <p>
+      La web está construida con el mismo método que explica. Cada sección nació de una spec, un
+      plan y una lista de tareas que viven en <code>spec/</code>, en este repositorio. Lo que lees
+      es el resultado de aplicarse el propio consejo.
+    </p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="criterios">
+  <h2 id="criterios" class="section__title">Criterios de aceptación</h2>
+  <p class="section__lede">Seis secciones. Ninguna marcada todavía.</p>
+
+  <ul class="checklist">
+    @for (module of modules; track module.path) {
+      <li>
+        <app-card>
+          <h3 card-title class="checklist__heading">
+            <a class="checklist__link" [routerLink]="module.path">
+              <span class="checklist__box" aria-hidden="true"></span>
+              <span class="checklist__number" aria-hidden="true">{{ module.number }}</span>
+              {{ module.label }}
+            </a>
+          </h3>
+          <p class="checklist__summary">{{ module.summary }}</p>
+        </app-card>
+      </li>
+    }
+  </ul>
+</section>

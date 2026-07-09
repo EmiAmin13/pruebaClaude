@@ -1,0 +1,144 @@
+<app-doc-page
+  marker="003 · OpenCode"
+  heading="OpenCode"
+  intro="Un agente de código que vive en la terminal, funciona con el proveedor de modelos que elijas y lee las reglas de tu proyecto desde un archivo de texto."
+  [sections]="sections"
+>
+  <app-doc-section sectionId="instalacion" title="Instalación">
+    <div class="prose">
+      <p>La forma más corta es el script de instalación oficial.</p>
+    </div>
+
+    <app-code-block language="bash" [code]="installScript" />
+
+    <div class="prose">
+      <p>Si prefieres un gestor de paquetes, cualquiera de estas sirve igual.</p>
+    </div>
+
+    <app-code-block language="bash" [code]="installAlternatives" />
+
+    <div class="prose">
+      <p>
+        Una vez instalado, se abre en el directorio del proyecto. La primera vez te pedirá
+        autenticarte contra el proveedor de modelos que vayas a usar.
+      </p>
+    </div>
+
+    <app-code-block language="bash" [code]="firstRun" />
+  </app-doc-section>
+
+  <app-doc-section sectionId="comandos" title="Comandos y atajos">
+    <div class="prose">
+      <p>
+        Dentro del TUI, los comandos empiezan por <code>/</code>. Muchos tienen además un atajo de
+        teclado que usa <code>ctrl+x</code> como tecla líder. Si dudas, <code>/help</code> los lista
+        todos.
+      </p>
+    </div>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <caption class="visually-hidden">
+          Comandos más utilizados de OpenCode
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Comando</th>
+            <th scope="col">Qué hace</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of commands; track row.command) {
+            <tr>
+              <th scope="row">
+                <code>{{ row.command }}</code>
+              </th>
+              <td>{{ row.what }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      <code>/undo</code> es la red de seguridad que hace cómodo dejar trabajar al agente: no solo
+      revierte el texto, también los archivos que tocó.
+    </p>
+  </app-doc-section>
+
+  <app-doc-section sectionId="build-vs-plan" title="Build vs Plan">
+    <div class="prose">
+      <p>
+        OpenCode trae dos agentes principales. <strong>Build</strong> es el de por defecto y tiene
+        todas las herramientas habilitadas. <strong>Plan</strong> es un agente restringido para
+        analizar y proponer.
+      </p>
+      <p>
+        Conviene precisar algo que suele contarse mal: Plan no es un modo de solo lectura. Funciona
+        con un sistema de permisos que deja las escrituras y los comandos de shell en
+        <em>preguntar</em>, de modo que nada se ejecuta sin que tú lo apruebes.
+      </p>
+    </div>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <caption class="visually-hidden">
+          Diferencias entre los agentes Build y Plan
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Aspecto</th>
+            <th scope="col">Build</th>
+            <th scope="col">Plan</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of agents; track row.aspect) {
+            <tr>
+              <th scope="row">{{ row.aspect }}</th>
+              <td>{{ row.build }}</td>
+              <td>{{ row.plan }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <p>
+        La regla práctica: empieza en Plan cuando no sabes dónde está el problema, y cambia a Build
+        cuando ya sabes qué archivo tocar. Build y Plan no son los únicos: puedes definir agentes
+        propios, como uno de revisión con acceso de lectura o uno de depuración limitado a
+        <code>bash</code> y lectura.
+      </p>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="agents-md" title="AGENTS.md">
+    <div class="prose">
+      <p>
+        <code>AGENTS.md</code> es el archivo donde escribes las reglas de tu proyecto para que el
+        agente las lea en cada sesión. Es la diferencia entre repetir «usa signals, no decoradores»
+        cada mañana y no tener que decirlo nunca más.
+      </p>
+      <p>
+        No es documentación para humanos. Es contexto operativo: estructura del repositorio,
+        convenciones que no se deducen del código, comandos para construir y probar, y los límites
+        que no debe cruzar. Puedes generar un primer borrador con <code>/init</code> y luego
+        podarlo.
+      </p>
+      <p>
+        Lo que mejor funciona es lo específico y comprobable. «Escribe código limpio» no dice nada;
+        «los tests van junto al archivo, como <code>foo.spec.ts</code>» sí.
+      </p>
+    </div>
+
+    <h3 class="subhead">Una plantilla para empezar</h3>
+    <app-code-block language="markdown" [code]="agentsMdTemplate" />
+
+    <p class="note">
+      Este mismo repositorio usa un archivo equivalente, y de ahí salen las convenciones que sigue
+      todo el código que estás leyendo.
+    </p>
+  </app-doc-section>
+</app-doc-page>

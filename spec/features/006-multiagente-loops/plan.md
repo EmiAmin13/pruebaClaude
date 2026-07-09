@@ -11,7 +11,7 @@ Página conceptual con diagramas de flujo. Explicar los roles y cómo se relacio
 3. Maquetar sección: qué es un subagente.
 4. Diagrama del flujo coordinador → implementador → verificador.
 5. Maquetar sección: loop engineering y el bucle de verificación.
-6. Relacionar con el ciclo SDD (dónde encada cada rol).
+6. Relacionar con el ciclo SDD (dónde encaja cada rol).
 
 ## Decisiones
 

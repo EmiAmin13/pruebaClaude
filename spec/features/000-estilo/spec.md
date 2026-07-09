@@ -1,6 +1,6 @@
 # 000 · Sistema de diseño
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -14,18 +14,18 @@ Sin una base visual común, cada página terminará con estilos inconsistentes y
 
 ## Criterios de aceptación
 
-- [ ] Variables CSS definidas en `src/styles.css` para colores, fuentes, espaciados, breakpoints y sombras.
-- [ ] Toggle claro/oscuro funcional con CSS custom properties y clase `.dark` en `<body>`.
-- [ ] `NavbarComponent` con logo, enlaces de navegación y menú hamburguesa en móvil.
-- [ ] `SidebarComponent` colapsable con estado manejado por signal.
-- [ ] `FooterComponent` con enlaces e información de recursos.
-- [ ] `CardComponent` reutilizable con content projection.
-- [ ] `LayoutComponent` que orquesta navbar + sidebar + router-outlet + footer.
-- [ ] `ThemeService` con signal `isDark` y método `toggle()`.
-- [ ] Estilos de accesibilidad: `:focus-visible`, landmarks ARIA, roles semánticos.
-- [ ] Layout responsive probado en móvil (320px+), tablet (768px+) y escritorio (1024px+).
-- [ ] Pasa AXE checks sin errores.
-- [ ] Sin dependencias externas de CSS (ni Bootstrap, Tailwind, etc.).
+- [x] Variables CSS definidas en `src/styles.css` para colores, fuentes, espaciados, breakpoints y sombras.
+- [x] Toggle claro/oscuro funcional con CSS custom properties y clase `.dark` en `<body>`.
+- [x] `NavbarComponent` con logo, enlaces de navegación y menú hamburguesa en móvil.
+- [x] `SidebarComponent` colapsable con estado manejado por signal.
+- [x] `FooterComponent` con enlaces e información de recursos.
+- [x] `CardComponent` reutilizable con content projection.
+- [x] `LayoutComponent` que orquesta navbar + sidebar + router-outlet + footer.
+- [x] `ThemeService` con signal `isDark` y método `toggle()`.
+- [x] Estilos de accesibilidad: `:focus-visible`, landmarks ARIA, roles semánticos.
+- [x] Layout responsive probado en móvil (320px+), tablet (768px+) y escritorio (1024px+).
+- [x] Pasa AXE checks sin errores. — Estructura y ARIA vía `axe-core`; el contraste, que jsdom no puede medir, vía `src/styles.spec.ts`.
+- [x] Sin dependencias externas de CSS (ni Bootstrap, Tailwind, etc.).
 
 ## Fuera de alcance
 

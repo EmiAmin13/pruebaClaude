@@ -1,0 +1,81 @@
+<app-doc-page
+  marker="007 · Recursos"
+  heading="Recursos"
+  intro="El material del curso, la documentación oficial de cada herramienta y por dónde seguir cuando termines de leer."
+  [sections]="sections"
+>
+  <app-doc-section sectionId="material" title="Material del curso">
+    <div class="prose">
+      <p>Los archivos que acompañan al curso, para descargar y tener a mano.</p>
+    </div>
+
+    <ul class="cards">
+      @for (item of material; track item.href) {
+        <li>
+          <app-card>
+            <h3 card-title class="cards__heading">
+              <a class="cards__link" [href]="item.href" download>
+                {{ item.title }}
+                <span class="cards__hint" aria-hidden="true">↓</span>
+              </a>
+            </h3>
+            <p class="cards__text">{{ item.description }}</p>
+            <p class="cards__meta">{{ item.meta }}</p>
+          </app-card>
+        </li>
+      }
+    </ul>
+  </app-doc-section>
+
+  <app-doc-section sectionId="documentacion" title="Documentación">
+    <div class="prose">
+      <p>
+        Cuando esta página y la documentación oficial no coincidan, hazle caso a la oficial: cambia
+        más rápido que un resumen.
+      </p>
+    </div>
+
+    <ul class="cards">
+      @for (item of documentation; track item.href) {
+        <li>
+          <app-card>
+            <h3 card-title class="cards__heading">
+              <a class="cards__link" [href]="item.href" target="_blank" rel="noopener">
+                {{ item.title }}
+                <span class="cards__hint" aria-hidden="true">↗</span>
+                <span class="visually-hidden">(se abre en una pestaña nueva)</span>
+              </a>
+            </h3>
+            <p class="cards__text">{{ item.description }}</p>
+          </app-card>
+        </li>
+      }
+    </ul>
+  </app-doc-section>
+
+  <app-doc-section sectionId="herramientas" title="Herramientas">
+    <div class="prose">
+      <p>
+        Las tres hacen lo mismo con filosofías distintas. Lo que aprendas de specs y agentes te
+        sirve en cualquiera de ellas.
+      </p>
+    </div>
+
+    <ul class="cards">
+      @for (item of tools; track item.href) {
+        <li>
+          <app-card>
+            <h3 card-title class="cards__heading">
+              <a class="cards__link" [href]="item.href" target="_blank" rel="noopener">
+                {{ item.title }}
+                <span class="cards__hint" aria-hidden="true">↗</span>
+                <span class="visually-hidden">(se abre en una pestaña nueva)</span>
+              </a>
+            </h3>
+            <p class="cards__text">{{ item.description }}</p>
+          </app-card>
+        </li>
+      }
+    </ul>
+  </app-doc-section>
+</app-doc-page>

@@ -1,6 +1,6 @@
 # 005 · Ciclo SDD
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -12,13 +12,13 @@ Es el núcleo del Día 3 del curso y la metodología que estamos usando en este 
 
 ## Criterios de aceptación
 
-- [ ] Explicación del problema que resuelve SDD.
-- [ ] Diagrama del ciclo SDD (constitución → specify → plan → tasks → implement → verify).
-- [ ] Explicación de los 3 niveles: spec-first, spec-anchored, spec-as-source.
-- [ ] Estructura de artefactos: constitution/ + features/ con spec, plan, tasks.
-- [ ] Referencia a la plantilla descargable.
-- [ ] Diseño responsive.
-- [ ] Pasa AXE checks.
+- [x] Explicación del problema que resuelve SDD.
+- [x] Diagrama del ciclo SDD (constitución → specify → plan → tasks → implement → verify).
+- [x] Explicación de los 3 niveles: spec-first, spec-anchored, spec-as-source.
+- [x] Estructura de artefactos: constitution/ + features/ con spec, plan, tasks.
+- [x] Referencia a la plantilla descargable.
+- [x] Diseño responsive.
+- [x] Pasa AXE checks.
 
 ## Fuera de alcance
 

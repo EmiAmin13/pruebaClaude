@@ -1,14 +1,14 @@
 # 002 · Fundamentos de IA — Tareas
 
-- [ ] Generar componente `FundamentosIaPageComponent`.
-- [ ] Configurar ruta lazy.
-- [ ] Maquetar sección: ¿Qué es un LLM?.
-- [ ] Maquetar sección: Tokens, parámetros y costes.
-- [ ] Maquetar sección: Ventana de contexto.
-- [ ] Maquetar sección: Multimodalidad y alucinaciones.
-- [ ] Maquetar sección: Prompt engineering (anatomía del prompt perfecto).
-- [ ] Maquetar sección: Vibe coding vs ingeniería de software.
-- [ ] Agregar diagramas/esquemas visuales.
-- [ ] Verificar accesibilidad (AXE).
-- [ ] Validar contra los criterios de aceptación de `spec.md`.
-- [ ] Mover la feature a "Hecho" en `../../constitution/roadmap.md`.
+- [x] Generar componente `FundamentosIaPageComponent`.
+- [x] Configurar ruta lazy.
+- [x] Maquetar sección: ¿Qué es un LLM?.
+- [x] Maquetar sección: Tokens, parámetros y costes.
+- [x] Maquetar sección: Ventana de contexto.
+- [x] Maquetar sección: Multimodalidad y alucinaciones.
+- [x] Maquetar sección: Prompt engineering (anatomía del prompt perfecto).
+- [x] Maquetar sección: Vibe coding vs ingeniería de software.
+- [x] Agregar diagramas/esquemas visuales.
+- [x] Verificar accesibilidad (AXE).
+- [x] Validar contra los criterios de aceptación de `spec.md`.
+- [x] Mover la feature a "Hecho" en `../../constitution/roadmap.md`.

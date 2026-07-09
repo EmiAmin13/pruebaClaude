@@ -1,6 +1,6 @@
 # 001 · Landing page
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -12,11 +12,11 @@ Es la puerta de entrada del sitio. Debe dar contexto al visitante sobre qué es 
 
 ## Criterios de aceptación
 
-- [ ] Hero con título, descripción breve y call-to-action.
-- [ ] Sección de módulos del curso (enlaces a cada página).
-- [ ] Diseño responsive (mobile y desktop).
-- [ ] Pasa AXE checks sin errores.
-- [ ] Navegación funcional a todas las rutas.
+- [x] Hero con título, descripción breve y call-to-action.
+- [x] Sección de módulos del curso (enlaces a cada página).
+- [x] Diseño responsive (mobile y desktop).
+- [x] Pasa AXE checks sin errores.
+- [x] Navegación funcional a todas las rutas. — Cubierto en `landing.spec.ts` y `app.spec.ts`.
 
 ## Fuera de alcance
 

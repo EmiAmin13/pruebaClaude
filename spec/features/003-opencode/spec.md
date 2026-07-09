@@ -1,6 +1,6 @@
 # 003 · OpenCode
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -12,12 +12,12 @@ OpenCode es la herramienta principal del curso. Los alumnos necesitan una refere
 
 ## Criterios de aceptación
 
-- [ ] Sección de instalación (descarga, npm, configuración inicial).
-- [ ] Tabla de comandos y atajos más utilizados.
-- [ ] Explicación de Build vs Plan mode con casos de uso.
-- [ ] Guía de AGENTS.md: qué es, qué incluir, plantilla.
-- [ ] Diseño responsive.
-- [ ] Pasa AXE checks.
+- [x] Sección de instalación (descarga, npm, configuración inicial).
+- [x] Tabla de comandos y atajos más utilizados.
+- [x] Explicación de Build vs Plan mode con casos de uso.
+- [x] Guía de AGENTS.md: qué es, qué incluir, plantilla.
+- [x] Diseño responsive.
+- [x] Pasa AXE checks.
 
 ## Fuera de alcance
 

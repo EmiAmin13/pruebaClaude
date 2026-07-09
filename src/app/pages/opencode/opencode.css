@@ -1,0 +1,5 @@
+.doc-table code {
+  font-size: var(--fs-xs);
+  color: var(--color-primary);
+  white-space: nowrap;
+}

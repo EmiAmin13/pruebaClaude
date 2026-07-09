@@ -1,0 +1,173 @@
+<app-doc-page
+  marker="005 · Ciclo SDD"
+  heading="Ciclo SDD"
+  intro="Spec-Driven Development: escribir la especificación primero, dejar que el agente implemente contra ella y verificar el resultado contra criterios que se acordaron antes de empezar."
+  [sections]="sections"
+>
+  <app-doc-section sectionId="el-problema" title="El problema que resuelve">
+    <div class="prose">
+      <p>
+        Un agente de código es rapidísimo produciendo algo que parece correcto. El cuello de botella
+        deja de ser escribir el código y pasa a ser
+        <strong>saber si el código es el que querías</strong>.
+      </p>
+      <p>
+        Sin una spec, esa pregunta no tiene respuesta objetiva. La intención vive en tu cabeza y en
+        una conversación que se borra al cerrar la terminal. Al día siguiente, el agente no sabe qué
+        decidiste ni por qué, así que vuelves a explicárselo, ligeramente distinto. El resultado es
+        un código que nadie diseñó.
+      </p>
+      <p>
+        SDD hace una sola cosa, y de ahí sale todo lo demás:
+        <strong>mueve la intención al repositorio</strong>. Deja de ser algo que recuerdas y pasa a
+        ser algo que se versiona, se revisa en un pull request y se le puede dar a leer al agente
+        cada mañana.
+      </p>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="el-ciclo" title="El ciclo">
+    <div class="prose">
+      <p>
+        La constitución se escribe una vez y gobierna el resto. Dentro de ella, cada feature recorre
+        el mismo circuito hasta que los criterios de aceptación se cumplen.
+      </p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 640 190" role="img" aria-labelledby="sdd-titulo sdd-desc">
+        <title id="sdd-titulo">Ciclo de Spec-Driven Development</title>
+        <desc id="sdd-desc">
+          La constitución gobierna el ciclo. Dentro de él se especifica, se planifica, se desglosa
+          en tareas, se implementa y se verifica. Si la verificación falla, se vuelve a la
+          especificación.
+        </desc>
+
+        <defs>
+          <marker id="punta-sdd" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,1 L7,4 L0,7 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <g fill="none" stroke="currentColor" stroke-width="1.25">
+          <rect x="190" y="6" width="260" height="32" rx="6" stroke-dasharray="4 3" />
+          <path d="M320,38 L320,58" marker-end="url(#punta-sdd)" />
+
+          <rect x="4" y="66" width="112" height="40" rx="6" />
+          <rect x="136" y="66" width="112" height="40" rx="6" />
+          <rect x="268" y="66" width="112" height="40" rx="6" />
+          <rect x="400" y="66" width="112" height="40" rx="6" />
+          <rect x="532" y="66" width="104" height="40" rx="6" />
+
+          <path d="M116,86 L132,86" marker-end="url(#punta-sdd)" />
+          <path d="M248,86 L264,86" marker-end="url(#punta-sdd)" />
+          <path d="M380,86 L396,86" marker-end="url(#punta-sdd)" />
+          <path d="M512,86 L528,86" marker-end="url(#punta-sdd)" />
+          <path d="M584,106 C584,160 60,160 60,110" marker-end="url(#punta-sdd)" />
+        </g>
+
+        <g text-anchor="middle">
+          <text x="320" y="26">constitución</text>
+          <text x="60" y="91">specify</text>
+          <text x="192" y="91">plan</text>
+          <text x="324" y="91">tasks</text>
+          <text x="456" y="91">implement</text>
+          <text x="584" y="91">verify</text>
+          <text x="322" y="152" class="diagram__accent">si falla, se corrige la spec</text>
+        </g>
+      </svg>
+    </figure>
+
+    <div class="prose">
+      <p>
+        La flecha de vuelta es la parte que importa. Cuando la verificación falla, la reacción
+        correcta no es pedirle otra vez lo mismo al agente con otras palabras: es preguntarse qué
+        decía mal la spec. Casi siempre decía poco.
+      </p>
+      <p>
+        Y hay una jerarquía: <strong>la constitución manda</strong>. Si una feature choca con la
+        misión o con el stack, se replantea la feature, no la constitución.
+      </p>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="niveles" title="Los tres niveles">
+    <div class="prose">
+      <p>
+        SDD no es todo o nada. La diferencia entre los tres niveles está en qué pasa con la spec
+        <em>después</em> de escribir el código.
+      </p>
+    </div>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <caption class="visually-hidden">
+          Los tres niveles de Spec-Driven Development
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Nivel</th>
+            <th scope="col">Qué significa</th>
+            <th scope="col">Cuándo usarlo</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (level of levels; track level.name) {
+            <tr>
+              <th scope="row">{{ level.name }}</th>
+              <td>{{ level.what }}</td>
+              <td>{{ level.when }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      Subir de nivel cuesta disciplina, no herramientas. La trampa habitual es creerse en
+      spec-anchored mientras la spec lleva tres semanas sin tocarse.
+    </p>
+  </app-doc-section>
+
+  <app-doc-section sectionId="artefactos" title="Los artefactos">
+    <div class="prose">
+      <p>
+        Cada archivo responde a una pregunta y solo a una. Si un documento responde a dos, acabará
+        desactualizado en una de ellas.
+      </p>
+    </div>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <caption class="visually-hidden">
+          Artefactos de una spec y pregunta que responde cada uno
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Archivo</th>
+            <th scope="col">A qué pregunta responde</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (artifact of artifacts; track artifact.file) {
+            <tr>
+              <th scope="row">
+                <code>{{ artifact.file }}</code>
+              </th>
+              <td>{{ artifact.answers }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">La estructura, en este mismo repositorio</h3>
+    <app-code-block language="texto" [code]="tree" />
+
+    <p class="note">
+      Este sitio no explica SDD desde fuera: se construyó así. Cada página que estás leyendo salió
+      de una <code>spec.md</code>, un <code>plan.md</code> y un <code>tasks.md</code>. La plantilla
+      y los enlaces del curso están en <a routerLink="/recursos">Recursos</a>.
+    </p>
+  </app-doc-section>
+</app-doc-page>

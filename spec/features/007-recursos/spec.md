@@ -1,6 +1,6 @@
 # 007 · Recursos
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -12,12 +12,12 @@ Centraliza todo el material complementario en un solo lugar para que los alumnos
 
 ## Criterios de aceptación
 
-- [ ] Enlace de descarga a la guía Claude Code PDF.
-- [ ] Enlace de descarga a la plantilla SDD (spec_template.zip).
-- [ ] Enlaces a documentación oficial: OpenCode, Context7, skills.sh.
-- [ ] Enlaces a herramientas: OpenCode, Claude Code, Cursor.
-- [ ] Diseño responsive.
-- [ ] Pasa AXE checks.
+- [x] Enlace de descarga a la guía Claude Code PDF.
+- [x] Enlace de descarga a la plantilla SDD (spec_template.zip).
+- [x] Enlaces a documentación oficial: OpenCode, Context7, skills.sh.
+- [x] Enlaces a herramientas: OpenCode, Claude Code, Cursor.
+- [x] Diseño responsive.
+- [x] Pasa AXE checks.
 
 ## Fuera de alcance
 

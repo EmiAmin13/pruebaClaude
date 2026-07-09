@@ -1,0 +1,166 @@
+<app-doc-page
+  marker="006 · Multiagentes"
+  heading="Multiagentes y loops"
+  intro="Cómo repartir el trabajo entre agentes especializados y cerrar el bucle para que se corrijan solos, sin que tengas que mirar cada paso."
+  [sections]="sections"
+>
+  <app-doc-section sectionId="subagentes" title="¿Qué es un subagente?">
+    <div class="prose">
+      <p>
+        Un subagente es un agente que otro agente invoca para una tarea concreta, con su propio
+        contexto limpio. Cuando termina, devuelve solo su conclusión: lo que leyó por el camino no
+        contamina la conversación principal.
+      </p>
+      <p>
+        Ese aislamiento es la razón de ser del patrón, y se entiende mejor recordando la
+        <a routerLink="/fundamentos-ia">ventana de contexto</a>. Una búsqueda que abre cuarenta
+        archivos gasta contexto en treinta y nueve que no importaban. Si esa búsqueda ocurre en un
+        subagente, el coordinador recibe la respuesta —«está en <code>auth.service.ts</code>, línea
+        120»— y no los cuarenta archivos.
+      </p>
+      <p>
+        La contrapartida: cada subagente arranca sin saber nada. Si lo que quieres se explica en dos
+        frases, invocarlo cuesta más de lo que ahorra.
+      </p>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="flujo" title="El flujo de tres roles">
+    <div class="prose">
+      <p>
+        El reparto que mejor aguanta es el de tres papeles. Ninguno es un modelo distinto: es el
+        mismo, con instrucciones y permisos distintos.
+      </p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 640 190" role="img" aria-labelledby="multi-titulo multi-desc">
+        <title id="multi-titulo">Flujo entre coordinador, implementador y verificador</title>
+        <desc id="multi-desc">
+          El coordinador reparte tareas a uno o varios implementadores. Lo que producen pasa al
+          verificador. Si la verificación falla, el trabajo vuelve al coordinador, que reparte de
+          nuevo.
+        </desc>
+
+        <defs>
+          <marker id="punta-multi" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,1 L7,4 L0,7 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <g fill="none" stroke="currentColor" stroke-width="1.25">
+          <rect x="6" y="60" width="120" height="44" rx="6" />
+
+          <rect x="230" y="14" width="150" height="36" rx="6" />
+          <rect x="230" y="64" width="150" height="36" rx="6" />
+          <rect x="230" y="114" width="150" height="36" rx="6" />
+
+          <rect x="480" y="60" width="120" height="44" rx="6" />
+
+          <path d="M126,78 C180,78 180,32 226,32" marker-end="url(#punta-multi)" />
+          <path d="M126,82 L226,82" marker-end="url(#punta-multi)" />
+          <path d="M126,86 C180,86 180,132 226,132" marker-end="url(#punta-multi)" />
+
+          <path d="M380,32 C430,32 430,78 476,78" marker-end="url(#punta-multi)" />
+          <path d="M380,82 L476,82" marker-end="url(#punta-multi)" />
+          <path d="M380,132 C430,132 430,86 476,86" marker-end="url(#punta-multi)" />
+
+          <path d="M540,104 C540,172 66,172 66,108" marker-end="url(#punta-multi)" />
+        </g>
+
+        <g text-anchor="middle">
+          <text x="66" y="86">coordinador</text>
+          <text x="305" y="36">implementador</text>
+          <text x="305" y="86">implementador</text>
+          <text x="305" y="136">implementador</text>
+          <text x="540" y="86">verificador</text>
+          <text x="303" y="164" class="diagram__accent">si no cumple, vuelve a repartirse</text>
+        </g>
+      </svg>
+    </figure>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <caption class="visually-hidden">
+          Los tres roles del flujo multiagente
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Rol</th>
+            <th scope="col">Qué hace</th>
+            <th scope="col">Paso del ciclo SDD</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (role of roles; track role.name) {
+            <tr>
+              <th scope="row">{{ role.name }}</th>
+              <td>{{ role.job }}</td>
+              <td>
+                <code>{{ role.stage }}</code>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      El verificador debe ser un agente distinto del que implementó. Quien escribió el código es
+      pésimo juzgando si cumple: ya se convenció una vez.
+    </p>
+  </app-doc-section>
+
+  <app-doc-section sectionId="loops" title="Loop engineering">
+    <div class="prose">
+      <p>
+        Un loop es un bucle en el que el agente actúa, observa el resultado real y vuelve a actuar,
+        hasta que se cumple una condición de salida. Lo que lo hace funcionar no es el modelo: es
+        que exista <strong>una señal que no miente</strong>.
+      </p>
+      <p>
+        Los tests, el compilador y el linter son esa señal. Un agente que puede ejecutarlos ya no
+        depende de creerse a sí mismo, y ahí es donde deja de alucinar y empieza a converger.
+      </p>
+      <p>Un bucle bien planteado tiene siempre tres piezas:</p>
+      <ul class="list">
+        <li><strong>Una acción</strong> que cambia el estado del mundo.</li>
+        <li>
+          <strong>Una señal objetiva</strong> que dice si mejoró. Sin ella, el bucle solo gira.
+        </li>
+        <li>
+          <strong>Una condición de parada</strong>, incluida la de rendirse. Un bucle sin salida
+          quema tokens hasta que lo matas.
+        </li>
+      </ul>
+    </div>
+
+    <h3 class="subhead">El ejemplo canónico</h3>
+    <app-code-block language="texto" [code]="loopExample" />
+
+    <p class="note">
+      La última línea es la que separa un bucle útil de uno que se atasca: le da permiso para parar
+      y pedir ayuda en vez de intentar lo mismo veinte veces.
+    </p>
+  </app-doc-section>
+
+  <app-doc-section sectionId="con-sdd" title="Cómo encaja con SDD">
+    <div class="prose">
+      <p>
+        Los multiagentes sin spec son caos repartido entre más actores. La spec es lo que hace
+        posible el reparto: el coordinador puede trocear el trabajo porque hay un
+        <code>tasks.md</code>, y el verificador puede aprobar o rechazar porque hay criterios de
+        aceptación escritos antes de empezar.
+      </p>
+      <p>
+        Fíjate en que es el mismo bucle del <a routerLink="/sdd-ciclo">ciclo SDD</a>, solo que
+        ejecutado por varios agentes en vez de por uno. La flecha de vuelta de <em>verify</em> a
+        <em>specify</em> es exactamente la flecha del verificador al coordinador.
+      </p>
+      <p>
+        De ahí la regla que lo resume todo: <strong>el humano dirige, la IA ejecuta</strong>. Tú
+        escribes los criterios; el bucle se encarga de alcanzarlos.
+      </p>
+    </div>
+  </app-doc-section>
+</app-doc-page>

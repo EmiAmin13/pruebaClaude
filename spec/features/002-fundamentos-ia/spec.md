@@ -1,6 +1,6 @@
 # 002 · Fundamentos de IA
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -12,12 +12,12 @@ Es la base conceptual necesaria para entender el resto del curso. Sin estos conc
 
 ## Criterios de aceptación
 
-- [ ] Explicación visual de cómo funciona un LLM (diagrama o esquema).
-- [ ] Secciones: LLMs, tokens, parámetros, contexto, multimodalidad, alucinaciones.
-- [ ] Anatomía del prompt perfecto (rol, contexto, tarea, restricciones, formato).
-- [ ] Comparativa vibe coding vs ingeniería de software.
-- [ ] Diseño responsive.
-- [ ] Pasa AXE checks.
+- [x] Explicación visual de cómo funciona un LLM (diagrama o esquema).
+- [x] Secciones: LLMs, tokens, parámetros, contexto, multimodalidad, alucinaciones.
+- [x] Anatomía del prompt perfecto (rol, contexto, tarea, restricciones, formato).
+- [x] Comparativa vibe coding vs ingeniería de software.
+- [x] Diseño responsive.
+- [x] Pasa AXE checks.
 
 ## Fuera de alcance
 

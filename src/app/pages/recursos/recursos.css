@@ -1,0 +1,63 @@
+.cards {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.cards li {
+  position: relative;
+}
+
+.cards__heading {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cards__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Extiende el área activable a toda la card sin anidar interactivos. */
+.cards__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cards__link:hover {
+  color: var(--color-primary);
+}
+
+.cards__hint {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.cards__link:hover .cards__hint {
+  color: var(--color-primary);
+}
+
+.cards__text {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.cards__meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

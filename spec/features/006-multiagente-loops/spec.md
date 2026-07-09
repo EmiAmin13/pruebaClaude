@@ -1,6 +1,6 @@
 # 006 · Multiagentes y loops
 
-**Estado:** propuesta
+**Estado:** hecha
 
 ## Qué hace
 
@@ -12,12 +12,12 @@ Completa la formación del Día 3 del curso. Los patrones multiagente son clave 
 
 ## Criterios de aceptación
 
-- [ ] Explicación de qué es un subagente y por qué usarlo.
-- [ ] Diagrama del flujo multiagente (coordinador, implementador, verificador).
-- [ ] Explicación de loop engineering y el bucle de verificación.
-- [ ] Relación con SDD y OpenCode.
-- [ ] Diseño responsive.
-- [ ] Pasa AXE checks.
+- [x] Explicación de qué es un subagente y por qué usarlo.
+- [x] Diagrama del flujo multiagente (coordinador, implementador, verificador).
+- [x] Explicación de loop engineering y el bucle de verificación.
+- [x] Relación con SDD y OpenCode.
+- [x] Diseño responsive.
+- [x] Pasa AXE checks.
 
 ## Fuera de alcance
 

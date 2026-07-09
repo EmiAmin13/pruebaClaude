@@ -1,0 +1,38 @@
+@if (isOpen()) {
+  <button type="button" class="backdrop" (click)="closeRequested.emit()">
+    <span class="visually-hidden">Cerrar navegación</span>
+  </button>
+}
+
+<aside id="sidebar" class="sidebar" [class.sidebar--open]="isOpen()">
+  <nav aria-label="Secciones del curso">
+    <p class="spec-marker sidebar__eyebrow">Contenido</p>
+    <ul class="sidebar__list">
+      <li>
+        <a
+          class="sidebar__link"
+          routerLink="/"
+          routerLinkActive="sidebar__link--active"
+          ariaCurrentWhenActive="page"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="sidebar__number" aria-hidden="true">001</span>
+          Inicio
+        </a>
+      </li>
+      @for (module of modules; track module.path) {
+        <li>
+          <a
+            class="sidebar__link"
+            [routerLink]="module.path"
+            routerLinkActive="sidebar__link--active"
+            ariaCurrentWhenActive="page"
+          >
+            <span class="sidebar__number" aria-hidden="true">{{ module.number }}</span>
+            {{ module.label }}
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+</aside>

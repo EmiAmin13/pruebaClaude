@@ -1,0 +1,144 @@
+/* El hero se lee como un `spec.md`: marcador, título, resumen y metadatos. */
+.hero {
+  max-width: var(--measure);
+  padding-bottom: var(--space-7);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero__title {
+  margin-block: var(--space-3) var(--space-4);
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.hero__subtitle {
+  display: block;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.hero__lede {
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+}
+
+.hero__cta {
+  display: inline-block;
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-bg);
+  text-decoration: none;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.hero__cta:hover {
+  opacity: 0.9;
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+
+.hero__meta dt {
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.hero__meta dd {
+  margin: 0;
+}
+
+.section {
+  margin-top: var(--space-7);
+}
+
+.section__title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section__lede {
+  margin-top: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.checklist {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.checklist__heading {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.checklist__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* La casilla nace de `tasks.md`: al apuntar a un módulo, se marca. */
+.checklist__box::before {
+  content: '[ ]';
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.checklist__link:hover .checklist__box::before,
+.checklist__link:focus-visible .checklist__box::before {
+  content: '[x]';
+  color: var(--color-accent);
+}
+
+.checklist__link:hover {
+  color: var(--color-primary);
+}
+
+/* Extiende el área activable a toda la card sin anidar interactivos. */
+.checklist__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.checklist li {
+  position: relative;
+}
+
+.checklist__number {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-primary);
+}
+
+.checklist__summary {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .checklist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

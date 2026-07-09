@@ -1,0 +1,204 @@
+<app-doc-page
+  marker="002 · Fundamentos"
+  heading="Fundamentos de IA"
+  intro="Qué hay dentro de un modelo de lenguaje, qué le puedes pedir y dónde está el límite entre pedirle cosas y hacer ingeniería con él."
+  [sections]="sections"
+>
+  <app-doc-section sectionId="que-es-un-llm" title="¿Qué es un LLM?">
+    <div class="prose">
+      <p>
+        Un modelo de lenguaje grande hace una sola cosa: dado un texto, calcula qué token es el más
+        probable a continuación. Elige uno, lo añade al texto y repite. Todo lo demás —escribir
+        código, resumir un documento, mantener una conversación— emerge de repetir esa operación.
+      </p>
+      <p>
+        Conviene interiorizarlo porque explica casi todos sus comportamientos raros. El modelo no
+        consulta una base de datos ni verifica lo que dice: optimiza verosimilitud, no verdad.
+      </p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 640 150" role="img" aria-labelledby="llm-titulo llm-desc">
+        <title id="llm-titulo">Ciclo autorregresivo de un modelo de lenguaje</title>
+        <desc id="llm-desc">
+          El prompt se convierte en tokens, el modelo calcula una distribución de probabilidad, se
+          elige un token y ese token se vuelve a introducir en el modelo para predecir el siguiente.
+        </desc>
+
+        <defs>
+          <marker id="punta" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,1 L7,4 L0,7 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <g fill="none" stroke="currentColor" stroke-width="1.25">
+          <rect x="4" y="20" width="104" height="40" rx="6" />
+          <rect x="138" y="20" width="104" height="40" rx="6" />
+          <rect x="272" y="20" width="104" height="40" rx="6" />
+          <rect x="406" y="20" width="104" height="40" rx="6" />
+          <rect x="540" y="20" width="96" height="40" rx="6" />
+
+          <path d="M108,40 L134,40" marker-end="url(#punta)" />
+          <path d="M242,40 L268,40" marker-end="url(#punta)" />
+          <path d="M376,40 L402,40" marker-end="url(#punta)" />
+          <path d="M510,40 L536,40" marker-end="url(#punta)" />
+          <path d="M588,60 C588,120 324,120 324,64" marker-end="url(#punta)" />
+        </g>
+
+        <g text-anchor="middle">
+          <text x="56" y="45">prompt</text>
+          <text x="190" y="45">tokens</text>
+          <text x="324" y="45">modelo</text>
+          <text x="458" y="45">probabilidad</text>
+          <text x="588" y="45">token</text>
+          <text x="456" y="112" class="diagram__accent">se reinyecta y vuelve a empezar</text>
+        </g>
+      </svg>
+    </figure>
+  </app-doc-section>
+
+  <app-doc-section sectionId="tokens" title="Tokens, parámetros y costes">
+    <div class="prose">
+      <p>
+        Un <strong>token</strong> es un fragmento de texto, más corto que una palabra y más largo
+        que una letra. El modelo nunca ve caracteres ni palabras: ve tokens. El español consume más
+        tokens que el inglés para decir lo mismo, así que el mismo texto cuesta algo más.
+      </p>
+      <p>
+        Los <strong>parámetros</strong> son los pesos que el modelo aprendió durante el
+        entrenamiento. Más parámetros suele significar más capacidad, pero no siempre mejor
+        resultado: un modelo pequeño bien dirigido gana a uno grande mal dirigido.
+      </p>
+      <p>
+        El <strong>coste</strong> se factura por tokens de entrada y de salida, casi siempre a
+        precios distintos. Esto tiene una consecuencia práctica: un contexto enorme se paga en cada
+        llamada, no una sola vez.
+      </p>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="contexto" title="Ventana de contexto">
+    <div class="prose">
+      <p>
+        La ventana de contexto es todo lo que el modelo ve en una llamada: las instrucciones del
+        sistema, la conversación hasta ahora, los archivos que le has pasado y el hueco reservado
+        para su respuesta. Es finita.
+      </p>
+      <p>
+        Contexto no es memoria. Entre una llamada y la siguiente, el modelo no recuerda nada: lo que
+        parece memoria es que el programa le reenvía la conversación entera cada vez. Cuando la
+        ventana se llena hay que resumir o descartar, y ahí es donde un agente empieza a olvidar
+        detalles del principio de la sesión.
+      </p>
+      <p>
+        De aquí sale una regla incómoda: <strong>más contexto no es mejor</strong>. Un contexto
+        lleno de ruido diluye lo importante y, además, lo pagas en cada turno.
+      </p>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="limites" title="Multimodalidad y alucinaciones">
+    <div class="prose">
+      <p>
+        Los modelos <strong>multimodales</strong> aceptan más que texto: imágenes, y en algunos
+        casos audio o vídeo. Para un desarrollador esto significa poder pasarle una captura de
+        pantalla de un fallo visual, o el diagrama de una arquitectura.
+      </p>
+      <p>
+        Una <strong>alucinación</strong> es una respuesta plausible y falsa. No es un fallo del
+        modelo: es exactamente lo que hace un sistema que optimiza verosimilitud. Inventar una
+        función que no existe se parece mucho, estadísticamente, a citar una que sí.
+      </p>
+      <p>Las tres defensas que funcionan, en orden de eficacia:</p>
+      <ul class="list">
+        <li>
+          <strong>Dale el contexto real</strong> en lugar de confiar en su memoria. Eso es
+          <abbr title="Retrieval-Augmented Generation">RAG</abbr>: recuperar los fragmentos
+          relevantes de una fuente fiable y añadirlos al prompt.
+        </li>
+        <li>
+          <strong>Deja que verifique</strong> con herramientas que no mienten: el compilador, los
+          tests, el linter. Un agente que puede ejecutar los tests se corrige solo.
+        </li>
+        <li>
+          <strong>Pide fuentes</strong> y compruébalas. Si no puede citar de dónde sale algo,
+          trátalo como una hipótesis.
+        </li>
+      </ul>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="prompt" title="Anatomía del prompt">
+    <div class="prose">
+      <p>
+        Un buen prompt no es más largo, es más específico. Casi todos los prompts que fallan omiten
+        una de estas cinco piezas.
+      </p>
+    </div>
+
+    <dl class="parts">
+      @for (part of promptParts; track part.name) {
+        <div class="parts__item">
+          <dt>{{ part.name }}</dt>
+          <dd>{{ part.role }}</dd>
+        </div>
+      }
+    </dl>
+
+    <h3 class="subhead">Un prompt que no sirve</h3>
+    <app-code-block language="texto" [code]="badPrompt" />
+    <p class="note">
+      No dice qué está mal, ni qué significa mejorar, ni qué no se puede tocar. El modelo tiene que
+      adivinar las tres cosas, y adivinará algo razonable que no es lo que querías.
+    </p>
+
+    <h3 class="subhead">El mismo prompt, utilizable</h3>
+    <app-code-block language="texto" [code]="goodPrompt" />
+    <p class="note">
+      Ahora el resultado se puede aceptar o rechazar sin discutir. Eso es un criterio de aceptación,
+      y es la semilla de todo lo que viene después.
+    </p>
+  </app-doc-section>
+
+  <app-doc-section sectionId="vibe-vs-ingenieria" title="Vibe coding vs ingeniería">
+    <div class="prose">
+      <p>
+        <em>Vibe coding</em> es pedirle cosas al modelo y quedarte con lo que funcione. Sirve para
+        prototipar, y es genuinamente rápido. El problema aparece cuando el prototipo sobrevive: no
+        queda constancia de qué se pidió, por qué, ni cómo saber si sigue estando bien.
+      </p>
+    </div>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <caption class="visually-hidden">
+          Comparación entre vibe coding e ingeniería de software con agentes
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Aspecto</th>
+            <th scope="col">Vibe coding</th>
+            <th scope="col">Ingeniería</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of comparison; track row.aspect) {
+            <tr>
+              <th scope="row">{{ row.aspect }}</th>
+              <td>{{ row.vibe }}</td>
+              <td>{{ row.engineering }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <p>
+        La diferencia no es cuánta IA usas, sino dónde vive la intención. En vibe coding vive en tu
+        cabeza y en un chat que se borra. En ingeniería vive en el repositorio, versionada, y el
+        agente la lee cada vez que empieza.
+      </p>
+    </div>
+  </app-doc-section>
+</app-doc-page>

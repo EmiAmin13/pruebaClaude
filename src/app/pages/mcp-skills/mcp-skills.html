@@ -1,0 +1,138 @@
+<app-doc-page
+  marker="004 · MCP y Skills"
+  heading="MCP y Skills"
+  intro="Dos maneras de ampliar un agente que se confunden a menudo. Una le da manos; la otra, criterio."
+  [sections]="sections"
+>
+  <app-doc-section sectionId="que-es-mcp" title="¿Qué es MCP?">
+    <div class="prose">
+      <p>
+        El <strong>Model Context Protocol</strong> es un protocolo abierto que estandariza cómo un
+        agente habla con sistemas externos. Antes de MCP, cada integración era código a medida: uno
+        para GitHub, otro para tu base de datos, otro para Jira. Con MCP, cualquier servicio que
+        hable el protocolo queda disponible para cualquier agente que lo hable.
+      </p>
+      <p>
+        Un <strong>servidor MCP</strong> expone herramientas que el agente puede invocar. Los hay de
+        dos tipos: <em>remotos</em>, que viven detrás de una URL, y <em>locales</em>, que el agente
+        arranca como un proceso en tu máquina.
+      </p>
+      <p>
+        Lo importante: MCP no hace al modelo más listo. Le da acceso a información que no tenía y a
+        acciones que no podía ejecutar.
+      </p>
+    </div>
+  </app-doc-section>
+
+  <app-doc-section sectionId="mcp-vs-skills" title="MCP frente a Skills">
+    <div class="prose">
+      <p>
+        Si MCP le da <strong>manos</strong> al agente, una skill le da <strong>criterio</strong>. Un
+        servidor MCP le permite consultar la documentación de una librería; una skill le enseña qué
+        hacer con ella.
+      </p>
+    </div>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <caption class="visually-hidden">
+          Diferencias entre un servidor MCP y una skill
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Aspecto</th>
+            <th scope="col">Servidor MCP</th>
+            <th scope="col">Skill</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of differences; track row.aspect) {
+            <tr>
+              <th scope="row">{{ row.aspect }}</th>
+              <td>{{ row.mcp }}</td>
+              <td>{{ row.skill }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      No compiten. Este proyecto usa las dos: Context7 como MCP para consultar documentación real, y
+      una skill de diseño para decidir cómo se ve la interfaz.
+    </p>
+  </app-doc-section>
+
+  <app-doc-section sectionId="context7" title="Configurar Context7">
+    <div class="prose">
+      <p>
+        Context7 resuelve un problema concreto: el modelo aprendió la documentación de tus librerías
+        en un momento dado, y desde entonces han cambiado. Con Context7, en vez de recordar la API,
+        la consulta.
+      </p>
+      <p>
+        Es un servidor remoto, así que basta con declarar su URL. La clave se lee de una variable de
+        entorno para no acabar en el repositorio.
+      </p>
+    </div>
+
+    <app-code-block language="json" [code]="remoteMcp" />
+
+    <div class="prose">
+      <p>
+        Un servidor local se declara igual pero con el comando que lo arranca. Este ejemplo expone
+        las herramientas del CLI de Angular.
+      </p>
+    </div>
+
+    <app-code-block language="json" [code]="localMcp" />
+
+    <p class="note">
+      Merece la pena escribir en <code>AGENTS.md</code> cuándo quieres que lo use, por ejemplo:
+      «antes de usar una API de una librería, consúltala con Context7». Un servidor disponible que
+      el agente no sabe cuándo invocar no sirve de nada.
+    </p>
+  </app-doc-section>
+
+  <app-doc-section sectionId="skills" title="Qué son las Skills">
+    <div class="prose">
+      <p>
+        Una skill es una carpeta con un archivo <code>SKILL.md</code>: un frontmatter que dice cómo
+        se llama y cuándo usarla, y debajo las instrucciones. Nada más.
+      </p>
+      <p>
+        La magia está en el <code>description</code>. El agente lee las descripciones de todas las
+        skills disponibles y carga el cuerpo solo de la que hace falta. Así puedes tener veinte
+        skills sin gastar contexto en las diecinueve que hoy no vienen al caso.
+      </p>
+    </div>
+
+    <app-code-block language="markdown" [code]="skillFile" />
+
+    <div class="prose">
+      <p>Las skills de proyecto viven en el repositorio, junto al código que gobiernan.</p>
+    </div>
+
+    <app-code-block language="texto" [code]="skillTree" />
+  </app-doc-section>
+
+  <app-doc-section sectionId="instalar-skills" title="Instalar una skill">
+    <div class="prose">
+      <p>
+        Instalar una skill es copiar una carpeta. Puedes escribirla tú, copiarla de otro repositorio
+        o instalarla desde un catálogo como
+        <a href="https://skills.sh" target="_blank" rel="noopener">skills.sh</a>.
+      </p>
+      <p>
+        Dos que valen la pena desde el primer día: <code>frontend-design</code>, que evita que cada
+        interfaz salga con el mismo aspecto de plantilla, y <code>find-skills</code>, que busca e
+        instala las demás.
+      </p>
+      <p>
+        La pregunta útil antes de instalar una:
+        <em>¿esto es criterio que quiero que aplique siempre, o una capacidad que necesita?</em> Si
+        es lo segundo, lo que buscas es un servidor MCP.
+      </p>
+    </div>
+  </app-doc-section>
+</app-doc-page>

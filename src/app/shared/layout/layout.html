@@ -1,0 +1,13 @@
+<a class="skip-link" href="#content">Saltar al contenido</a>
+
+<app-navbar [sidebarOpen]="sidebarOpen()" (menuToggle)="toggleSidebar()" />
+
+<app-sidebar [isOpen]="sidebarOpen()" (closeRequested)="closeSidebar()" />
+
+<div class="shell">
+  <main id="content" class="content" tabindex="-1">
+    <router-outlet />
+  </main>
+
+  <app-footer />
+</div>
